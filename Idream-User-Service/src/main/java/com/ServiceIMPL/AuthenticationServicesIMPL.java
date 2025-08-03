@@ -1,0 +1,68 @@
+package com.ServiceIMPL;
+
+import java.net.URI;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.DTO.RegisterRequest;
+import com.DTO.UserResponse;
+import com.Entity.Role;
+import com.Entity.User;
+import com.Enum.RolesEnum;
+import com.Enum.UserStatusEnum;
+import com.Exceptions.ResourseFoundException;
+import com.Exceptions.RoleFoundException;
+import com.Repository.RoleRepo;
+import com.Repository.UserRepo;
+import com.Service.AuthenticationServices;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+public class AuthenticationServicesIMPL implements AuthenticationServices {
+
+	@Autowired
+	private UserRepo us;
+
+	@Autowired
+	private RoleRepo rp;
+
+	@Override
+	public UserResponse UserRegister(RegisterRequest registerRequest) {
+
+		log.info("registerRequest:- " + registerRequest);
+
+		// User user = us.findByEmail(registerRequest.getEmail()).orElseThrow(() -> ;
+
+		if (us.existsByEmail(registerRequest.getEmail())) {
+			throw new ResourseFoundException("User Already Exist");
+		}
+
+		ModelMapper model = new ModelMapper();
+
+		User user = model.map(registerRequest, User.class);
+
+		user.setStatus(UserStatusEnum.Active);
+
+		Role role = rp.findByName(RolesEnum.DSA).get();
+
+		if (us.existsByRole(user.getRole())) {
+			us.save(user);
+			throw new RoleFoundException("Role Already Exist");
+		}
+
+		user.setRole(role);
+		User addedUser = us.save(user);
+		
+		ModelMapper model1 = new ModelMapper();
+		
+		UserResponse response=	model1.map(addedUser, UserResponse.class);
+
+		System.out.println(response);
+		return response;
+	}
+
+}

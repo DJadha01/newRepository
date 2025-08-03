@@ -1,0 +1,27 @@
+package com.DTO;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+
+import javax.persistence.Entity;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.Entity.User;
+import com.Enum.UserStatusEnum;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Data
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@Slf4j
+public class ErrorHandler {
+
+	private String msg;
+}

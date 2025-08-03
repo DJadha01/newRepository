@@ -1,0 +1,37 @@
+package com.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.DTO.RegisterRequest;
+import com.Service.AuthenticationServices;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@Slf4j
+@RequestMapping("/api/v1/auth")
+@Tag
+public class AuthenticationController {
+
+	@Autowired
+	private AuthenticationServices as;
+	
+	
+	@PostMapping("/signUp")
+	public ResponseEntity<?> signUp(@RequestBody RegisterRequest registerRequest){
+		
+		log.debug("Register Request:- "+ registerRequest);
+		
+		return new ResponseEntity(as.UserRegister(registerRequest), HttpStatus.OK);
+				
+	}
+}

@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+D:\PayPocket Money App\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1744371254.index
+1248440607.index
+213040683.index
+1891838536.index
+2749106176.index
+1291060567.index
+2297921593.index

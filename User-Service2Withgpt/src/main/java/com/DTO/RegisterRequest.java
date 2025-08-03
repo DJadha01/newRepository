@@ -1,0 +1,66 @@
+package com.DTO;
+
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Data
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@Slf4j
+@Validated
+public class RegisterRequest {
+
+	@Schema(example = "Djadhava01")
+	@NotBlank(message = "Username cannot be empty")
+	@JsonProperty(value = "username")
+	private String username;
+
+	@Schema(example = "avinashpatil07@gmail.com")
+	@NotBlank(message = "Email cannot be empty")
+	@Email(message = "Invalid email format")
+	@JsonProperty(value = "email")
+	private String email;
+
+	@Schema(example = "Avinash")
+	@NotBlank(message = "First name cannot be empty")
+	@JsonProperty(value = "firstName")
+	private String firstName;
+
+	@JsonProperty(value = "middleName")
+	private String middleName;
+
+	@Schema(example = "Jadhav")
+	@NotBlank(message = "Last name cannot be empty")
+	@JsonProperty(value = "lastName")
+	private String lastName;
+
+	@Schema(example = "+918657458596")
+	@NotBlank(message = "Mobile number cannot be empty")
+	@Pattern(regexp = "(^$|\\+\\d{1,3}\\s?\\d{1,14})", message = "Invalid contact number. Please provide a valid mobile number.")
+	@JsonProperty(value = "mobileNumber")
+	private String mobileNumber;
+
+	@Schema(example = "Passw123")
+	@NotBlank(message = "Password cannot be empty")
+	//@Size(min = 8, message = "Password must be at least 8 characters long")
+	@JsonProperty(value = "password")
+	@Column(length = 255)
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "Password must contain at least one lowercase letter, one uppercase letter, and one digit")
+	private String password;
+
+}

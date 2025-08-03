@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="Customer-Service"/>
+<aop-project name="User-Service2Withgpt"/>
+<aop-project name="Idream-User-Service"/>
+<aop-project name="MachineTestTask"/>
+<aop-project name="User-Service"/>
+</aop-reference-model>

@@ -1,0 +1,7 @@
+package com.Exceptions;
+
+public class RoleFoundException extends RuntimeException {
+
+	
+	
+}

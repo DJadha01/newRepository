@@ -1,0 +1,22 @@
+package com.Exceptions;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.DTO.ErrorHandler;
+
+import lombok.extern.slf4j.Slf4j;
+
+@RestControllerAdvice
+@Slf4j
+public class GlobalException {
+
+	public ResponseEntity<ErrorHandler> UserAlreadyExist(ResourseFoundException re){
+		
+		
+		
+		return null;
+			
+	}
+	
+}

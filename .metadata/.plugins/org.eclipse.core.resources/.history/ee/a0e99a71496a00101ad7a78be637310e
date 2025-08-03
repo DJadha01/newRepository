@@ -1,0 +1,50 @@
+package com.ServiceIMPL;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.DTO.RegisterRequest;
+import com.DTO.UserResponse;
+import com.Entity.User;
+import com.Enum.UserStatusEnum;
+import com.Exceptions.ResourseFoundException;
+import com.Repository.UserRepo;
+import com.Service.AuthenticationServices;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+public class AuthenticationServicesIMPL implements AuthenticationServices{
+
+	@Autowired
+	private UserRepo us;
+
+	
+	@Override
+	public UserResponse UserRegister(RegisterRequest registerRequest) {
+
+		log.info("registerRequest:- "+ registerRequest);
+		
+
+		//User user = us.findByEmail(registerRequest.getEmail()).orElseThrow(() -> ;
+		
+		
+		if (us.existByEmail(registerRequest.getEmail())) {
+			throw new ResourseFoundException("User Already Exist");	
+		}
+		
+		ModelMapper model = new ModelMapper();
+
+		User user = model.map(registerRequest, User.class);
+		
+		user.setStatus(UserStatusEnum.Active);
+		
+		
+		
+		return null;
+	}
+
+}
+
