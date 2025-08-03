@@ -63,7 +63,6 @@ public class UserController {
 	 @GetMapping("/report/{format}")
 		public ResponseEntity<?> generateReport(@PathVariable("format") String format) {
 			log.info("format:"  + format);
-			System.out.println(" ");
 			authentic.getReportInService(format);
 			return new ResponseEntity("ok", HttpStatus.OK);
 		}
